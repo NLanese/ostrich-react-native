@@ -1,5 +1,5 @@
 import React from "react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { View, Pressable, Text, StyleSheet } from "react-native";
 
 
@@ -12,15 +12,21 @@ const defaultInactiveTab = ({
     borderBottomColor: 'grey'
 })
 const defaultActiveText = ({
-    fontSize: 12,
-    color: 'white'
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'white',
+    marginRight: 8,
+    marginLeft: 8,
+    marginBottom: 4
 })
 const defaultInactiveText = ({
-    fontSize: 12,
-    color: 'white'
+    fontSize: 16,
+    textAlign: 'center',
+    color: 'grey',
+    marginRight: 8,
+    marginLeft: 8,
+    marginBottom: 4,
 })
-
-console.log("Line 22")
 
 
 const TabBar = ({
@@ -40,13 +46,11 @@ const TabBar = ({
     startIndex = false, // Determines which index starts off selected. Defaults to 0 (first tab)
 }) => {
 
-console.log("Line 43")
-
 
 // --------------------------------------------------- //
 //                                                     //
 //                 DEFAULT SETTINGS                    //
-//                                                     //
+//               No Function Default                   //
 //v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v//       
     if (!tabsArray){
         throw new Error("Error! <TabBar> Components need a tabsArray prop. This will be an array of strings to be displayed as the Tab Titles")
@@ -79,22 +83,21 @@ console.log("Line 43")
         throw new Error("Error: <TabBar> cannot have a startIndex prop that is larger than the tabArray prop's length!")
     }
 
-    console.log("Line 79")
-
-
-    console.log(startIndex)
 
 
 // --------------------------------------------------- //
 //                                                     //
 //                   LOCAL STATES                      //
-//                                                     //
+//               with Function Default                 //
 //v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v// 
 
-    const [selectedIndex, setSelectedIndex] = useEffect(startIndex)
+    const [selectedIndex, setSelectedIndex] = useState(startIndex)
 
-
-    console.log("Line 94")
+    if (!onChangeIndex){
+        onChangeIndex = (index) => {
+            return null
+        } 
+    }
 
 
 // --------------------------------------------------- //
@@ -106,13 +109,12 @@ console.log("Line 43")
     // The Outter Container Style
     const tabContainer = ({
         height: height,
-        width: width,
+        width: 'auto',
         borderRadius: borderRadius,
         display: 'flex',
-        flexDirection: 'row'
+        flexDirection: 'row',
+        alignItems: 'center',
     })
-
-    console.log("Line 112")
 
     // Creates the official Style Object
     const Styles = StyleSheet.create({
@@ -123,15 +125,17 @@ console.log("Line 43")
         tabContainer: {...tabContainer}
     })
 
+
     // Renders the Active and Inactive Tab Styles
-    determineTabStyles = (index, tabCount) => {
+    determineTabStyles = (index) => {
         if (index == selectedIndex){
-            return {...Styles.styleActive, flex: 1, flexDirection: 'row'}
+            return {...Styles.styleActive, flexDirection: 'row'}
         }
         else{
-            return {...Styles.styleInactive, flex: 1, flexDirection: 'row'}
+            return {...Styles.styleInactive, flexDirection: 'row'}
         }
     }
+
 
     // Renders the Active and Inactive Text Styles
     determineTextStyles = (index) => {
@@ -145,10 +149,6 @@ console.log("Line 43")
 
 
 
-
-
-
-
     
 // --------------------------------------------------- //
 //                                                     //
@@ -156,7 +156,8 @@ console.log("Line 43")
 //                                                     //
 //v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v// 
 
-    handleSelection = () => {
+    handleSelection = (index) => {
+        console.log(index)
         setSelectedIndex(index)
         onChangeIndex(index)
     }
@@ -169,12 +170,10 @@ console.log("Line 43")
 //v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v//    
 
     renderTabs = () => {
-        length = tabsArray.length
         return tabsArray.map( (tab, index = 0) => {
-
             return(
-                <Pressable onPress={(index) => handleSelection(index)}>
-                    <View key={index} style={determineTabStyles(index, tabCount)}>
+                <Pressable onPress={() => handleSelection(index)}>
+                    <View key={index} style={determineTabStyles(index)}>
                         <Text style={determineTextStyles(index)}>{tab}</Text>
                     </View>
                 </Pressable>
@@ -192,8 +191,8 @@ console.log("Line 43")
 //v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v// 
 
     return(
-        <View style={Styles.tabContainer}>
-            {renderTabs}
+        <View style={{...Styles.tabContainer, display: 'flex'}}>
+            {renderTabs()}
         </View>
     )
 }
