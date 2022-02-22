@@ -127,18 +127,17 @@ const TabBar = ({
 
 
     // Renders the Active and Inactive Tab Styles
-    determineTabStyles = (index) => {
+    const determineTabStyles = (index) => {
         if (index == selectedIndex){
-            return {...Styles.styleActive, flexDirection: 'row'}
+            return {...Styles.styleActive}
         }
         else{
-            return {...Styles.styleInactive, flexDirection: 'row'}
+            return {...Styles.styleInactive}
         }
     }
 
-
     // Renders the Active and Inactive Text Styles
-    determineTextStyles = (index) => {
+    const determineTextStyles = (index) => {
         if (index == selectedIndex){
             return Styles.tabTextStyleActive
         }
@@ -156,7 +155,7 @@ const TabBar = ({
 //                                                     //
 //v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v// 
 
-    handleSelection = (index) => {
+    const handleSelection = (index) => {
         console.log(index)
         setSelectedIndex(index)
         onChangeIndex(index)
@@ -169,12 +168,14 @@ const TabBar = ({
 //                                                     //
 //v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v//    
 
-    renderTabs = () => {
+    const renderTabs = () => {
         return tabsArray.map( (tab, index = 0) => {
             return(
                 <Pressable onPress={() => handleSelection(index)}>
                     <View key={index} style={determineTabStyles(index)}>
-                        <Text style={determineTextStyles(index)}>{tab}</Text>
+                        <View>
+                            <Text style={determineTextStyles(index)}>{tab}</Text>
+                        </View>
                     </View>
                 </Pressable>
             )
