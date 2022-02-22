@@ -1,11 +1,14 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
 
+import TabBar from './Components/TabBar';
+
 export default function App() {
   return (
     <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-      <StatusBar style="auto" />
+      <TabBar 
+        tabsArray={["option1", "option2", "option3", "option4"]}
+      />
     </View>
   );
 }
