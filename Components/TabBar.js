@@ -42,7 +42,7 @@ const TabBar = ({
     width = false, // Determines width of the tab bar
     borderRadius = false, // Determines Border Radius
 
-    onChangeIndex = false, // Method to run whenever a different tab is selected. TAKES THE INDEX SELECTED AS A PARAMETER
+    onChange = false, // Method to run whenever a different tab is selected. TAKES THE INDEX SELECTED AS A PARAMETER
     startIndex = false, // Determines which index starts off selected. Defaults to 0 (first tab)
 }) => {
 
@@ -93,10 +93,16 @@ const TabBar = ({
 
     const [selectedIndex, setSelectedIndex] = useState(startIndex)
 
-    if (!onChangeIndex){
+    let onChangeIndex
+    if (!onChange){
         onChangeIndex = (index) => {
             return null
         } 
+    }
+    else{
+        onChangeIndex = (index) => {
+            onChange(index)
+        }
     }
 
 
@@ -156,7 +162,6 @@ const TabBar = ({
 //v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v// 
 
     const handleSelection = (index) => {
-        console.log(index)
         setSelectedIndex(index)
         onChangeIndex(index)
     }
@@ -171,8 +176,8 @@ const TabBar = ({
     const renderTabs = () => {
         return tabsArray.map( (tab, index = 0) => {
             return(
-                <Pressable onPress={() => handleSelection(index)}>
-                    <View key={index} style={determineTabStyles(index)}>
+                <Pressable onPress={() => handleSelection(index)} key={index}>
+                    <View style={determineTabStyles(index)}>
                         <View>
                             <Text style={determineTextStyles(index)}>{tab}</Text>
                         </View>
