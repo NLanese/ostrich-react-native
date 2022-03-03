@@ -14,24 +14,81 @@ export default function App() {
     console.log(index)
     if (index == 0){
       return(
-        <Gradient
-          colorOne="red"
-          colorTwo="#DDDDDD"
+        <View>
+            <Gradient
+            colorOne="red"
+            colorTwo="blue"
+            style={{
+              width: 100,
+              height: 100,
+              borderRadius: 50
+            }}
+            hollow={true}
+            hollowColor={"#f1f1f1"}
+            hollowBorderSize="large"
+            hollowStyles={{
+              justifyContent: 'center',
+              alignItems: 'center'
+            }}
+          >
+            <Text>Example of Hollow Gradient!</Text>
+          </Gradient>
+
+            <View style={{marginTop: 15}} />
+
+          <Gradient
+          colorOne="black"
+          colorTwo="green"
           style={{
-            width: 75,
-            height: 75,
-            borderRadius: 37
+            width: 100,
+            height: 100,
+            borderRadius: 0
           }}
           hollow={true}
           hollowColor={"#f1f1f1"}
-          hollowBorderSize="medium"
+          hollowBorderSize="large"
           hollowStyles={{
             justifyContent: 'center',
             alignItems: 'center'
           }}
         >
-          <Text>A!</Text>
+          <Text>Example of Hollow Gradient!</Text>
         </Gradient>
+
+        <View style={{marginTop: 15}} />
+
+
+        <Gradient
+          colorOne="yellow"
+          colorTwo="pink"
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 50,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Text style={{textAlign: 'center', padding: 2}}>Example of Filled Gradient!</Text>
+        </Gradient>
+
+        <View style={{marginTop: 15}} />
+
+
+        <Gradient
+          colorOne="cyan"
+          colorTwo="lime"
+          style={{
+            width: 100,
+            height: 100,
+            borderRadius: 0,
+            justifyContent: 'center',
+            alignItems: 'center'
+          }}
+        >
+          <Text style={{textAlign: 'center', padding: 2}}>Example of Filled Gradient!</Text>
+        </Gradient>
+        </View>
       )
     }
     if (index === 1){
