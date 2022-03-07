@@ -4,7 +4,7 @@ import { StyleSheet, Text, View } from 'react-native';
 
 import TabBar from './Components/TabBar';
 import Gradient from './Components/Gradient';
-
+import DynamicInput from './Components/DynamicInput';
 
 export default function App() {
 
@@ -93,7 +93,77 @@ export default function App() {
     }
     if (index === 1){
       return(
-       <Text> Henlo </Text>
+        <View>
+          <DynamicInput 
+
+            height={50}
+            width={300}
+
+            placeholder="Example Field One"
+
+            borderLeftRightWidth={10}
+            borderTopBottomWidth={10}
+            borderRadius={30}
+
+            activeColorOne="blue"
+            activeColorTwo="cyan"
+
+            inactiveColor="grey"
+
+            activeTextStyle={{
+              paddingLeft: 20,
+              fontWeight: '600',
+              color: 'blue'
+            }}
+
+            inactiveTextStyle={{
+              paddingLeft: 20,
+              fontWeight: '200',
+              color: 'red'
+            }}
+
+            inactiveBackgroundColor= "grey"
+
+            placeholderColor='white'
+            
+          />
+
+          <View style={{marginTop: 40}} />
+
+          <DynamicInput 
+
+            height={50}
+            width={300}
+
+            borderLeftRightWidth={10}
+            borderTopBottomWidth={10}
+            borderRadius={30}
+
+            activeColorOne="red"
+            activeColorTwo="cyan"
+
+            inactiveColor="grey"
+            
+          />
+
+          <View style={{marginTop: 40}} />
+
+          <DynamicInput 
+
+            height={50}
+            width={300}
+
+            borderLeftRightWidth={10}
+            borderTopBottomWidth={10}
+            borderRadius={30}
+
+            activeColorOne="red"
+            activeColorTwo="cyan"
+
+            inactiveColor="grey"
+            
+          />
+        </View>
       )
     }
   }
@@ -103,9 +173,8 @@ export default function App() {
     <View style={styles.container}>
 
       <TabBar 
-        tabsArray={["Gradient", "option2", "option3", "option4"]}
+        tabsArray={["Gradient", "Dynamic Inputs", "option3", "option4"]}
         onChange={(index) => {
-          console.log(index)
           setIndex(index)
         }}
         tabTextStyleActive={{color: 'blue', padding: 0, fontSize: 22, marginTop: -3}}
@@ -118,7 +187,7 @@ export default function App() {
 }
 
 const styles = StyleSheet.create({
-  container: {
+  container:{
     marginTop: 100,
     // flex: 1,
     backgroundColor: '#f1f1f1',
