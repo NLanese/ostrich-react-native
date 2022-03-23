@@ -156,7 +156,6 @@ const DynamicInput = ({
 //                                          //
 //-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v-v//
     return(
-        // <View style={{width: width + borderLeftRightWidth}}>
             <Gradient 
                 colorOne={determineBorderColor().colorOne}
                 colorTwo={determineBorderColor().colorTwo}
@@ -165,14 +164,14 @@ const DynamicInput = ({
                     width: width + borderLeftRightWidth,
                     justifyContent: 'center',
                     alignItems: 'center',
-                    borderRadius: borderRadius * 0.9,
+                    borderRadius: borderRadius * 1.1,                
                 }}
             >
                 <TextInput
 
                     placeholder={placeholder}
                     placeholderTextColor={placeholderColor}
-                    
+
                     value={content} 
                     style={{
                         height: height,
@@ -210,7 +209,6 @@ const DynamicInput = ({
                     }}
                 />
             </Gradient>
-        // </View>
         
     )
 }
